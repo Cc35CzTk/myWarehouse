@@ -1,0 +1,96 @@
+package duong.runner;
+import java.util.NoSuchElementException;
+
+@SuppressWarnings("unused")
+public class LinkedList{
+	private Node root;
+	
+	public void addFirst(int element)
+	{
+		root = new Node(element, root);
+	}
+	public int getFirst()
+	{
+		if(root == null)
+			throw new NoSuchElementException();
+		else
+		{
+			Node temp = root;
+			temp = temp.next;
+			return temp.data;
+		}
+	}
+	@SuppressWarnings("null")
+	public Node removeFirst()
+	{
+		if(root == null)
+			throw new NoSuchElementException();
+		else
+		{
+			Node temp = root;
+			root = root.next;
+			return temp;
+		}
+	}
+	public void addLast(int element)
+	{
+		if(root == null) root = new Node(element, root);
+		Node temp = root;
+		while(temp.next != null)temp = temp.next;
+		temp.next = new Node(element,null);
+	}
+	
+	public int getLast()
+	{
+		if(root == null) 
+			throw new NoSuchElementException();
+		else {
+			Node temp = root;
+			while(temp.next != null)temp = temp.next;
+			return temp.data;
+		}
+	}
+	public Node removeLast()
+	{
+		if(root == null)
+			throw new NoSuchElementException();
+		else
+		{
+			Node temp = root;
+			while(temp.next.next != null)temp = temp.next;
+			temp.next = null;
+			return temp;
+		}
+	}
+	public void print(Node bt)
+	{
+		if(bt.next != null)
+		{
+			bt = bt.next;
+			System.out.printf("%d ",bt.data);
+			print(bt);
+		}
+	}
+	private static class Node{
+		private int data;
+		private Node next;
+		public Node(int item, Node next)
+		{
+			this.data = item;
+			this.next = next;
+		}
+	}
+	public static void main(String[] args) {
+		LinkedList list = new LinkedList();
+		list.addLast(10);
+		list.addLast(4);
+		list.addLast(7);
+		list.removeFirst();
+		list.addFirst(12);
+		list.print(list.root);
+//		System.out.println(binaryTree.print());
+//		binaryTree.remove();
+//		System.out.println(binaryTree.print());
+//		binaryTree.preOrder(binaryTree.root);
+	}
+}
